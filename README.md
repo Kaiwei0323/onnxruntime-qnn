@@ -45,4 +45,6 @@ cd onnxruntime
 ./build.sh --use_qnn --qnn_home /home/aim/Documents/v2.26.0.240828/qairt/2.26.0.240828 --build_shared_lib --build_wheel --config Release --skip_tests --build_dir build/Linux --parallel 2 --allow_running_as_root
 ```
 
-reference: https://onnxruntime.ai/docs/build/eps.html#qnn
+reference: 
+* https://onnxruntime.ai/docs/build/eps.html#qnn
+* https://docs.qualcomm.com/bundle/publicresource/topics/80-63442-2/dsp_runtime.html
