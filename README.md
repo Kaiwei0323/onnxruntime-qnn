@@ -48,3 +48,4 @@ cd onnxruntime
 reference: 
 * https://onnxruntime.ai/docs/build/eps.html#qnn
 * https://docs.qualcomm.com/bundle/publicresource/topics/80-63442-2/dsp_runtime.html
+* https://github.com/microsoft/onnxruntime/issues/21203
