@@ -44,3 +44,5 @@ git clone --recursive https://github.com/Microsoft/onnxruntime.git
 cd onnxruntime
 ./build.sh --use_qnn --qnn_home /home/aim/Documents/v2.26.0.240828/qairt/2.26.0.240828 --build_shared_lib --build_wheel --config Release --skip_tests --build_dir build/Linux --parallel 2 --allow_running_as_root
 ```
+
+reference: https://onnxruntime.ai/docs/build/eps.html
