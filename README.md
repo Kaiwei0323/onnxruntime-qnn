@@ -14,6 +14,8 @@ cd build
 cmake ..
 make -j$(nproc)
 make install
+echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
 cmake --version
 ```
 
