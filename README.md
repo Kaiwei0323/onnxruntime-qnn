@@ -4,6 +4,7 @@
 ```
 apt update
 apt install -y build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
 cd /tmp
 wget https://github.com/Kitware/CMake/releases/download/v3.28.0/cmake-3.28.0.tar.gz
 tar -zxvf cmake-3.28.0.tar.gz
@@ -42,8 +43,12 @@ gcc --version
 
 ## install onnxruntime-qnn
 ```
+cd /home/aim
 git clone --recursive https://github.com/Microsoft/onnxruntime.git
 cd onnxruntime
+export LD_LIBRARY_PATH=/usr/local/gcc/lib64:$LD_LIBRARY_PATH >> ~/.bashrc
+strings /usr/local/gcc/lib64/libstdc++.so.6 | grep GLIBCXX_3.4.29
+apt install protobuf-compiler -y
 ./build.sh --use_qnn --qnn_home /home/aim/Documents/v2.26.0.240828/qairt/2.26.0.240828 --build_shared_lib --build_wheel --config Release --skip_tests --build_dir build/Linux --parallel 2 --allow_running_as_root
 ```
 
