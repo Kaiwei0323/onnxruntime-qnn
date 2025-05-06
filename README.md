@@ -1,6 +1,7 @@
-# onnxruntime-qnn
+# Build ONNX Runtime with QNN Execution Provider (QNN EP)
+This guide explains how to build ONNX Runtime with the QNN Execution Provider (QNN EP) on a Ubuntu system.
 
-## install CMake 3.28.0
+## Step 1: Install CMake 3.28.0
 ```
 apt update
 apt install -y build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev
@@ -20,11 +21,13 @@ source ~/.bashrc
 cmake --version
 ```
 
-## install g++ 11
+---
+
+## Step 2: Install GCC/G++ 11.1.0
 ```
 apt update
 apt install -y build-essential wget m4 autoconf automake libgmp-dev libmpfr-dev libmpc-dev zlib1g-dev flex bison
-cd /tmp
+cd /home/aim
 wget http://ftp.gnu.org/gnu/gcc/gcc-11.1.0/gcc-11.1.0.tar.gz
 tar -xvzf gcc-11.1.0.tar.gz
 cd gcc-11.1.0
@@ -41,11 +44,26 @@ update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
 gcc --version
 ```
 
-## install onnxruntime-qnn
+---
+
+## Step 3: Clone and Configure ONNX Runtime
 ```
 cd /home/aim
 git clone --recursive https://github.com/Microsoft/onnxruntime.git
 cd onnxruntime
+```
+### Modidy CMakefile
+Edit onnxruntime/cmake/CMakeLists.txt at lines 1001–1003:
+```
+set(QNN_ARCH_ABI aarch64-oe-linux-gcc11.2)
+else()
+set(QNN_ARCH_ABI aarch64-oe-linux-gcc11.2)
+```
+
+---
+
+## Step 4: Build ONNX Runtime with QNN
+```
 export LD_LIBRARY_PATH=/usr/local/gcc/lib64:$LD_LIBRARY_PATH >> ~/.bashrc
 strings /usr/local/gcc/lib64/libstdc++.so.6 | grep GLIBCXX_3.4.29
 apt install protobuf-compiler -y
