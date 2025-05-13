@@ -68,6 +68,9 @@ echo 'export LD_LIBRARY_PATH=/usr/local/gcc/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
 source ~/.bashrc
 strings /usr/local/gcc/lib64/libstdc++.so.6 | grep GLIBCXX_3.4.29
 apt install protobuf-compiler -y
+python3.11 -m pip install numpy
+python3.11 -m pip install packaging
+python3.11 -m pip install onnx
 ./build.sh --use_qnn --qnn_home /home/aim/Documents/v2.26.0.240828/qairt/2.26.0.240828 --build_shared_lib --build_wheel --config Release --skip_tests --build_dir build/Linux --parallel 2 --allow_running_as_root
 ```
 
