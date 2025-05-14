@@ -34,7 +34,7 @@ cd gcc-11.2.0
 ./contrib/download_prerequisites
 mkdir ../gcc-build
 cd ../gcc-build
-../gcc-11.1.0/configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib
+../gcc-11.2.0/configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib
 make -j$(nproc)
 make install
 echo "export PATH=/usr/local/gcc/bin:$PATH" >> ~/.bashrc
