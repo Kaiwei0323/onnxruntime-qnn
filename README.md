@@ -1,6 +1,36 @@
 # Build ONNX Runtime with QNN Execution Provider (QNN EP)
 This guide explains how to build ONNX Runtime with the QNN Execution Provider (QNN EP) on a Ubuntu system.
 
+## Step 1: Install GCC/G++ 11.2.0
+```
+apt update
+apt install -y build-essential wget m4 autoconf automake libgmp-dev libmpfr-dev libmpc-dev zlib1g-dev flex bison
+cd ~/
+wget http://ftp.gnu.org/gnu/gcc/gcc-11.2.0/gcc-11.2.0.tar.gz
+tar -xvzf gcc-11.2.0.tar.gz
+cd gcc-11.2.0
+./contrib/download_prerequisites
+mkdir ../gcc-build
+cd ../gcc-build
+../gcc-11.2.0/configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib
+make -j$(nproc)
+make install
+echo "export PATH=/usr/local/gcc/bin:$PATH" >> ~/.bashrc
+source ~/.bashrc
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
+update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
+gcc --version
+```
+
+## Step 2: Intall python3.11
+```
+add-apt-repository ppa:deadsnakes/ppa
+apt update
+apt install python3.11
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
+update-alternatives --config python3
+```
+
 ## Step 1: Install CMake 3.28.0
 ```
 apt update
@@ -23,26 +53,7 @@ cmake --version
 
 ---
 
-## Step 2: Install GCC/G++ 11.2.0
-```
-apt update
-apt install -y build-essential wget m4 autoconf automake libgmp-dev libmpfr-dev libmpc-dev zlib1g-dev flex bison
-cd ~/
-wget http://ftp.gnu.org/gnu/gcc/gcc-11.2.0/gcc-11.2.0.tar.gz
-tar -xvzf gcc-11.2.0.tar.gz
-cd gcc-11.2.0
-./contrib/download_prerequisites
-mkdir ../gcc-build
-cd ../gcc-build
-../gcc-11.2.0/configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib
-make -j$(nproc)
-make install
-echo "export PATH=/usr/local/gcc/bin:$PATH" >> ~/.bashrc
-source ~/.bashrc
-update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
-update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
-gcc --version
-```
+
 
 ---
 
