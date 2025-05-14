@@ -31,24 +31,14 @@ update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 update-alternatives --config python3
 ```
 
-## Step 1: Install CMake 3.28.0
+## Step 3: Install CMake 3.28.0
 ```
 apt update
-apt install -y build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
-cd /tmp
+apt install -y build-essential libssl-dev
+cd ~/
 wget https://github.com/Kitware/CMake/releases/download/v3.28.0/cmake-3.28.0.tar.gz
 tar -zxvf cmake-3.28.0.tar.gz
 cd cmake-3.28.0
-mkdir build
-cd build
-../configure
-cmake ..
-make -j$(nproc)
-make install
-echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bashrc
-source ~/.bashrc
-cmake --version
 ```
 
 ---
