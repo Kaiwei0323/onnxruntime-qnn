@@ -23,14 +23,14 @@ cmake --version
 
 ---
 
-## Step 2: Install GCC/G++ 11.1.0
+## Step 2: Install GCC/G++ 11.2.0
 ```
 apt update
 apt install -y build-essential wget m4 autoconf automake libgmp-dev libmpfr-dev libmpc-dev zlib1g-dev flex bison
-cd /home/aim
-wget http://ftp.gnu.org/gnu/gcc/gcc-11.1.0/gcc-11.1.0.tar.gz
-tar -xvzf gcc-11.1.0.tar.gz
-cd gcc-11.1.0
+cd ~/
+wget http://ftp.gnu.org/gnu/gcc/gcc-11.2.0/gcc-11.2.0.tar.gz
+tar -xvzf gcc-11.2.0.tar.gz
+cd gcc-11.2.0
 ./contrib/download_prerequisites
 mkdir ../gcc-build
 cd ../gcc-build
