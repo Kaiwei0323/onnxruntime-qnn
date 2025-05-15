@@ -14,7 +14,7 @@ This guide walks you through building ONNX Runtime with support for Qualcomm's Q
 ```
 add-apt-repository ppa:deadsnakes/ppa
 apt update
-apt install python3.11
+apt install python3.11 -y
 update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 update-alternatives --config python3
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
