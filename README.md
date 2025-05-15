@@ -1,7 +1,16 @@
-# Build ONNX Runtime with QNN Execution Provider (QNN EP)
-This guide explains how to build ONNX Runtime with the QNN Execution Provider (QNN EP) on a Ubuntu system.
+# 🧠 Build ONNX Runtime with Qualcomm QNN Execution Provider on Ubuntu
+This guide walks you through building ONNX Runtime with support for Qualcomm's QNN Execution Provider (QNN EP) on Ubuntu. It includes steps to install GCC 11.2.0, Python 3.11, and CMake 3.28.0, and details how to configure and build ONNX Runtime with the QNN SDK.
 
-## Step 1: Install GCC/G++ 11.2.0
+---
+
+## ✅ Prerequisites
+* QCS6490
+* Ubuntu 20.04
+* Qualcomm QNN SDK (e.g., v2.26.0.240828)
+
+---
+
+## Step 1: Install GCC 11.2.0
 ```
 apt update
 apt install -y build-essential wget m4 autoconf automake libgmp-dev libmpfr-dev libmpc-dev zlib1g-dev flex bison
@@ -17,19 +26,23 @@ make -j$(nproc)
 make install
 echo "export PATH=/usr/local/gcc/bin:$PATH" >> ~/.bashrc
 source ~/.bashrc
-update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
-update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
 gcc --version
 ```
 
-## Step 2: Intall python3.11
+---
+
+## Step 2: Install Python 3.11
 ```
 add-apt-repository ppa:deadsnakes/ppa
 apt update
 apt install python3.11
 update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 update-alternatives --config python3
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3.11 get-pip.py
 ```
+
+---
 
 ## Step 3: Install CMake 3.28.0
 ```
@@ -39,35 +52,34 @@ cd ~/
 wget https://github.com/Kitware/CMake/releases/download/v3.28.0/cmake-3.28.0.tar.gz
 tar -zxvf cmake-3.28.0.tar.gz
 cd cmake-3.28.0
+echo 'export LD_LIBRARY_PATH=/usr/local/gcc/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
+strings /usr/local/gcc/lib64/libstdc++.so.6 | grep GLIBCXX_3.4.29
+./bootstrap
+make -j$(nproc)
+make install
 ```
 
 ---
 
-
-
----
-
-## Step 3: Clone and Configure ONNX Runtime
+## Step 4: Clone and Configure ONNX Runtime
 ```
 cd /home/aim
 git clone --recursive https://github.com/Microsoft/onnxruntime.git
 cd onnxruntime
 ```
-### Modidy CMakefile
-Edit onnxruntime/cmake/CMakeLists.txt at lines 1001–1003:
+### 🔧 Modify CMake ABI for QNN
+Edit onnxruntime/cmake/CMakeLists.txt and around line 1001, set the QNN ABI as follows:
 ```
-set(QNN_ARCH_ABI aarch64-oe-linux-gcc11.2)
+set(QNN_ARCH_ABI aarch64-ubuntu-gcc9.4)
 else()
-set(QNN_ARCH_ABI aarch64-oe-linux-gcc11.2)
+set(QNN_ARCH_ABI aarch64-ubuntu-gcc9.4)
 ```
 
 ---
 
-## Step 4: Build ONNX Runtime with QNN
+## Step 5: Build ONNX Runtime with QNN EP
 ```
-echo 'export LD_LIBRARY_PATH=/usr/local/gcc/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
-source ~/.bashrc
-strings /usr/local/gcc/lib64/libstdc++.so.6 | grep GLIBCXX_3.4.29
 apt install protobuf-compiler -y
 python3.11 -m pip install numpy
 python3.11 -m pip install packaging
