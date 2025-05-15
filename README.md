@@ -14,7 +14,7 @@ This guide walks you through building ONNX Runtime with support for Qualcomm's Q
 ```
 apt update
 apt install -y build-essential wget m4 autoconf automake libgmp-dev libmpfr-dev libmpc-dev zlib1g-dev flex bison
-cd ~/
+cd /home/aim
 wget http://ftp.gnu.org/gnu/gcc/gcc-11.2.0/gcc-11.2.0.tar.gz
 tar -xvzf gcc-11.2.0.tar.gz
 cd gcc-11.2.0
