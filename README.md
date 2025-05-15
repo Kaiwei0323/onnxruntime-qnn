@@ -10,28 +10,7 @@ This guide walks you through building ONNX Runtime with support for Qualcomm's Q
 
 ---
 
-## Step 1: Install GCC 11.2.0
-```
-apt update
-apt install -y build-essential wget m4 autoconf automake libgmp-dev libmpfr-dev libmpc-dev zlib1g-dev flex bison
-cd /home/aim
-wget http://ftp.gnu.org/gnu/gcc/gcc-11.2.0/gcc-11.2.0.tar.gz
-tar -xvzf gcc-11.2.0.tar.gz
-cd gcc-11.2.0
-./contrib/download_prerequisites
-mkdir ../gcc-build
-cd ../gcc-build
-../gcc-11.2.0/configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib
-make -j$(nproc)
-make install
-echo "export PATH=/usr/local/gcc/bin:$PATH" >> ~/.bashrc
-source ~/.bashrc
-gcc --version
-```
-
----
-
-## Step 2: Install Python 3.11
+## Step 1: Install Python 3.11
 ```
 add-apt-repository ppa:deadsnakes/ppa
 apt update
@@ -44,11 +23,11 @@ python3.11 get-pip.py
 
 ---
 
-## Step 3: Install CMake 3.28.0
+## Step 2: Install CMake 3.28.0
 ```
 apt update
 apt install -y build-essential libssl-dev
-cd ~/
+cd /home/aim
 wget https://github.com/Kitware/CMake/releases/download/v3.28.0/cmake-3.28.0.tar.gz
 tar -zxvf cmake-3.28.0.tar.gz
 cd cmake-3.28.0
@@ -58,6 +37,27 @@ strings /usr/local/gcc/lib64/libstdc++.so.6 | grep GLIBCXX_3.4.29
 ./bootstrap
 make -j$(nproc)
 make install
+```
+
+---
+
+## Step 3: Install GCC 11.1.0
+```
+apt update
+apt install -y build-essential wget m4 autoconf automake libgmp-dev libmpfr-dev libmpc-dev zlib1g-dev flex bison
+cd /home/aim
+wget http://ftp.gnu.org/gnu/gcc/gcc-11.1.0/gcc-11.1.0.tar.gz
+tar -xvzf gcc-11.1.0.tar.gz
+cd gcc-11.1.0
+./contrib/download_prerequisites
+mkdir ../gcc-build
+cd ../gcc-build
+../gcc-11.1.0/configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib
+make -j$(nproc)
+make install
+echo "export PATH=/usr/local/gcc/bin:$PATH" >> ~/.bashrc
+source ~/.bashrc
+gcc --version
 ```
 
 ---
