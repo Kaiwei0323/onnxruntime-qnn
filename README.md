@@ -86,7 +86,11 @@ set(QNN_ARCH_ABI aarch64-ubuntu-gcc9.4)
 ## Step 5: Build ONNX Runtime with QNN EP
 ```
 apt install protobuf-compiler -y
-python3.11 -m pip install numpy
+python3 -m pip uninstall numpy
+apt install python3.11-distutils -y
+apt-get install python3.11-dev -y
+python3 -m pip install numpy --force-reinstall --no-binary :all:
+pip install numpy
 python3.11 -m pip install packaging
 python3.11 -m pip install onnx
 ./build.sh --use_qnn --qnn_home /home/aim/Documents/v2.26.0.240828/qairt/2.26.0.240828 --build_shared_lib --build_wheel --config Release --skip_tests --build_dir build/Linux --parallel 2 --allow_running_as_root
