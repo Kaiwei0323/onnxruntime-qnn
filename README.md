@@ -55,7 +55,12 @@ cd ../gcc-build
 ../gcc-11.1.0/configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib
 make -j$(nproc)
 make install
-echo "export PATH=/usr/local/gcc/bin:$PATH" >> ~/.bashrc
+echo "export PATH=/usr/local/gcc/bin:\$PATH" >> /root/.bashrc
+echo "export PATH=/usr/local/gcc/bin:$PATH >> /root/.bashrc
+echo "export CC=/usr/local/gcc/bin/gcc >> /root/.bashrc
+echo "export CXX=/usr/local/gcc/bin/g++ >> /root/.bashrc
+
+source /root/.bashrc
 source ~/.bashrc
 gcc --version
 ```
